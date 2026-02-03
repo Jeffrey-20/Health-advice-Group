@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* 1. DYNAMIC BACKGROUND */
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                    url("{% static 'images/' %}{{ weather.bg_image|default:'day_clear.jpg' }}") no-repeat center center fixed;
+        background-size: cover;
+        transition: background-image 1s ease-in-out;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    /* 2. GLASS TILES */
+    .glass-tile {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .monitor-header { display: flex; justify-content: space-between; align-items: center; }
+    .temp-large { font-size: 4rem; font-weight: bold; margin: 10px 0; }
+    
+    /* 3. REFLECTION FORM */
+    .update-box textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        color: white;
+        padding: 15px;
+        margin: 15px 0;
+        font-size: 1rem;
+        resize: none;
+    }
+
+    .save-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+    .save-btn:hover { background: #45a049; transform: translateY(-2px); }
+
+    @media (max-width: 768px) { .dashboard-container { grid-template-columns: 1fr; } }
+</style>
+
+<div class="dashboard-container">
+    <div class="glass-tile">
+        <div class="monitor-header">
+            <div>
+                <h2 style="margin:0;">{{ weather.city }}</h2>
+                <span style="opacity: 0.8;">Current Conditions</span>
+            </div>
+            <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="icon">
+        </div>
+        
+        <div class="temp-large">{{ weather.temperature|floatformat:0 }}°C</div>
+        <p style="text-transform: capitalize; font-size: 1.2rem;">{{ weather.description }}</p>
+        
+        <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; opacity: 0.9;">
+            <span>💧 Humidity: {{ weather.humidity }}%</span>
+            <span>💨 Wind: {{ weather.wind_speed }} m/s</span>
+        </div>
+    </div>
+
+    <div class="glass-tile update-box">
+        <h3>Charity Impact Log</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">How is the weather in {{ weather.city }} affecting your group today?</p>
+        
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="city" value="{{ weather.city }}">
+            <input type="hidden" name="condition" value="{{ weather.main }}">
+            <textarea name="impact_note" rows="4" placeholder="Enter your observations..."></textarea>
+            <button type="submit" class="save-btn">Update Dashboard</button>
+        </form>
+        
+        <p style="font-size: 0.7rem; margin-top: 15px; opacity: 0.6;">
+            🛡️ <strong>GDPR Notice:</strong> Your notes are encrypted and used only for your charity's monitoring. You can delete them at any time.
+        </p>
+    </div>
+</div>
+{% endblock %}

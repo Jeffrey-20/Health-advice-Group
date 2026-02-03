@@ -7,4 +7,5 @@ urlpatterns = [
     # ... your other paths ...
     path('', views.home, name='home'),
     path('forecast/', views.forecast, name='forecast'),
+    path('dashboard', views.dashboard,name='dashboard' )
 ]

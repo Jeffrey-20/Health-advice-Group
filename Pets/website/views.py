@@ -48,7 +48,7 @@ def home(request):
         # Get the filename part, default to 'clear' if condition is unknown
         condition = mapping.get(main_weather, 'clear')
         time_prefix = "night_" if is_night else "day_"
-        
+
         weather_data = {
             
             'city': data['name'],
@@ -89,3 +89,12 @@ def forecast(request):
             })
     
     return render(request, 'forecast.html', {'forecast': forecast_list, 'city': city})
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
+
+
+
+
