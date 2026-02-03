@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<h1>7-Day Forecast for {{ city }}</h1>
+<div class="forecast-container">
+    {% for day in forecast %}
+    <div class="day-card">
+        <p>{{ day.date }}</p>
+        <img src="http://openweathermap.org/img/wn/{{ day.icon }}@2x.png">
+        <p>{{ day.temp }}°C</p>
+        <p>{{ day.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .forecast-container { display: flex; gap: 10px; flex-wrap: wrap; }
+    .day-card { border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center; }
+</style>
+
+
+{% endblock %}
