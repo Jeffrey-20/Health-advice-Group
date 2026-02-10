@@ -1,20 +1,31 @@
+
+
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block body_style %}
+style="
+background:
+linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+url('{% static 'images/' %}{{ weather.bg_image|default:'day_clear.jpg' }}')
+no-repeat center center fixed;
+background-size: cover;
+"
+{% endblock %}
+
+
 {% block content %}
+
+
+
+
+
+
 <style>
     /* 1. THE MAIN BACKGROUND - Controlled by Python */
-    body {
-        margin: 0;
-        min-height: 100vh;
-        /* Dynamic URL passed from views.py */
-        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                    url("{% static 'images/' %}{{ weather.bg_image }}") no-repeat center center fixed;
-        background-size: cover;
-        transition: background-image 1.0s ease-in-out;
-        color: white;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+   
+
 
     /* 2. THE CONTAINER - Now transparent to let the body BG show */
     .weather-page-container {
@@ -24,6 +35,7 @@
         align-items: center;
         padding-top: 80px;
     }
+
 
     .search-wrapper {
         background: white;
@@ -37,6 +49,7 @@
         margin-bottom: 40px;
     }
 
+
     .search-wrapper input {
         border: none;
         flex: 1;
@@ -46,8 +59,10 @@
         color: #333;
     }
 
+
     .icon { color: #888; margin-right: 10px; }
     .location-toggle { color: #333; border-left: 1px solid #ddd; padding-left: 15px; cursor: pointer; white-space: nowrap;}
+
 
     .recent-locations-label {
         width: 90%;
@@ -59,6 +74,7 @@
         font-weight: bold;
         text-align: left;
     }
+
 
     /* 3. THE GLASS CARD */
     .weather-card {
@@ -74,10 +90,13 @@
         text-align: center;
     }
 
+
     .temp-display { font-size: 3.5rem; margin: 10px 0; font-weight: bold; }
     .temp-display span { font-size: 1.5rem; font-weight: normal; }
     .city-name { font-size: 1.8rem; margin: 0; }
     .country-name { opacity: 0.8; margin-bottom: 15px; }
+
+
 
 
     .search-button {
@@ -93,15 +112,18 @@
     margin-left: 10px;
 }
 
+
 .search-button:hover {
     background-color: #555;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+
 .search-button:active {
     transform: translateY(0);
 }
+
 
 /* Ensure the input doesn't feel cramped */
 .search-wrapper input {
@@ -112,7 +134,18 @@
     outline: none;
     color: #333;
 }
+
+
+
+
 </style>
+
+
+
+
+
+
+
 
 <div class="weather-page-container">
     <div class="search-wrapper">
@@ -123,32 +156,40 @@
     </form>
 </div>
 
+
     {% if messages %}
         {% for message in messages %}
             <p style="background: rgba(255,0,0,0.2); padding: 10px; border-radius: 5px;">{{ message }}</p>
         {% endfor %}
     {% endif %}
 
+
     <div class="recent-locations-label">Current Location</div>
+
 
     <div class="weather-card">
         {% if weather %}
             <h2 class="city-name">{{ weather.city }}</h2>
             <div class="country-name">United Kingdom</div>
 
+
             <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="weather icon">
+
 
             <div class="temp-display">
                 {{ weather.temperature|floatformat:0 }}°<span>C</span>
             </div>
 
+
             <div class="real-feel">
                 RealFeel® {{ weather.temperature|add:"-2"|floatformat:0 }}°
             </div>
 
+
             <p style="margin-top: 15px; text-transform: capitalize; font-weight: 500;">
                 {{ weather.description }}
             </p>
+
 
             <div style="display: flex; justify-content: space-around; margin-top: 20px; font-size: 0.85rem; opacity: 0.9;">
                 <span>💧 {{ weather.humidity }}%</span>
@@ -160,4 +201,12 @@
         {% endif %}
     </div>
 </div>
+
+
+
+
+
+
+
+
 {% endblock %}
