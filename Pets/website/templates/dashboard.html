@@ -182,10 +182,4 @@
 
 </div>
 
-<form action="{% url 'logout' %}" method="POST" style="display: inline;">
-    {% csrf_token %}
-    <button type="submit" style="background: rgba(244, 67, 54, 0.2); color: #ff5252; border: 1px solid #ff5252; padding: 8px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s;">
-        Logout
-    </button>
-</form>
 {% endblock %}
