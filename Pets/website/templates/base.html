@@ -8,7 +8,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <!-- Global CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +26,11 @@
             <h1 class="logo">🌦 Weather</h1>
             <nav>
                 <a href="{% url 'home' %}">Home</a>
+            </nav>
+            
+
+             <nav>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
             </nav>
         </div>
     </header>

@@ -118,3 +118,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# settings.py
+
+# This tells Django where to redirect unauthorized users
+LOGIN_URL = 'login' 
+
+# This tells Django where to go after a successful login
+LOGIN_REDIRECT_URL = 'dashboard'
