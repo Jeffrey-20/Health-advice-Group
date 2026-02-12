@@ -16,24 +16,64 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
 </head>
 
+<style>
+    /* Base style for all navigation buttons */
+.nav-btn {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* Default: Matches the structure but uses white/gray for general links */
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px); /* Gives a slight lift effect */
+}
+
+/* Specific Red Logout style (as you requested) */
+.logout-btn {
+    background: rgba(244, 67, 54, 0.2);
+    color: #ff5252;
+    border: 1px solid #ff5252;
+}
+
+.logout-btn:hover {
+    background: rgba(244, 67, 54, 0.4);
+}
+</style>
 
 <body {% block body_style %}{% endblock %}>
 
 
     <!-- Navigation Bar -->
-    <header class="navbar">
-        <div class="nav-container">
-            <h1 class="logo">🌦 Weather</h1>
-            <nav>
-                <a href="{% url 'home' %}">Home</a>
-            </nav>
+  <header class="navbar">
+    <div class="nav-container">
+        <h1 class="logo" style="margin: 0; font-size: 1.5rem;">🌦 Weather</h1>
+        <nav>
+            <a href="{% url 'home' %}" class="nav-btn">Home</a>
             
-
-             <nav>
-                <a href="{% url 'dashboard' %}">Dashboard</a>
-            </nav>
-        </div>
-    </header>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="nav-btn">Dashboard</a>
+                
+                <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-btn logout-btn">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="nav-btn">Login</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
 
 
     <main>

@@ -50,3 +50,70 @@ main {
 
 /*  Homepahe */
 
+/* Navbar Container */
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Button Styling */
+
+/* Navbar Styling */
+.navbar {
+    background: rgba(0, 0, 0, 0.2); /* Darker glass effect */
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Base Button Style (Matching your Logout button) */
+.nav-btn {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.1); /* White transparent for Home/Dash */
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin-left: 10px;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Specific Red Logout Style */
+.logout-btn {
+    background: rgba(244, 67, 54, 0.2) !important;
+    color: #ff5252 !important;
+    border: 1px solid #ff5252 !important;
+}
+
+.logout-btn:hover {
+    background: rgba(244, 67, 54, 0.4) !important;
+}
